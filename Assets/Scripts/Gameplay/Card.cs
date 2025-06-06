@@ -11,8 +11,6 @@ public class Card : MonoBehaviour
 
     public CardStack CurrentStack => currentStack;
 
-    public Image View => view;
-
 
     public void Awake()
     {

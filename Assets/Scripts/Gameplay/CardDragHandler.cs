@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Vector3 startPos;
-    private Transform originalParent;
     private Canvas canvas;
     private Card card;
 
@@ -24,8 +23,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
 
         startPos = transform.position;
-        originalParent = transform.parent;
-
+        
         transform.SetAsLastSibling();
     }
 
