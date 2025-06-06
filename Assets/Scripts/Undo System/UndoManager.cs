@@ -3,31 +3,31 @@ using System.Collections.Generic;
 
 public static class UndoManager
 {
-    private static Stack<Move> moveHistory = new Stack<Move>();
+    private static Stack<IUndoableAction> history = new Stack<IUndoableAction>();
 
     public static event Action OnUndoStateChanged;
 
-    public static bool CanUndo => moveHistory.Count > 0;
+    public static bool CanUndo => history.Count > 0;
 
-    public static void RegisterMove(Card card, CardStack from, CardStack to)
+    public static void RegisterAction(IUndoableAction action)
     {
-        moveHistory.Push(new Move(card, from, to));
+        history.Push(action);
         OnUndoStateChanged?.Invoke();
     }
 
-    public static void UndoLastMove()
+    public static void UndoLast()
     {
-        if (moveHistory.Count > 0)
+        if (history.Count > 0)
         {
-            Move lastMove = moveHistory.Pop();
-            lastMove.Undo();
+            var action = history.Pop();
+            action.Undo();
             OnUndoStateChanged?.Invoke();
         }
     }
 
     public static void Reset()
     {
-        moveHistory.Clear();
+        history.Clear();
         OnUndoStateChanged?.Invoke();
     }
 }

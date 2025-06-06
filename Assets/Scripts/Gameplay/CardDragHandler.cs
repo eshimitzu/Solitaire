@@ -45,7 +45,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             CardStack targetStack = result.gameObject.GetComponent<CardStack>();
             if (targetStack != null && targetStack != card.CurrentStack)
             {
-                UndoManager.RegisterMove(card, card.CurrentStack, targetStack);
+                UndoManager.RegisterAction(new MoveAction(card, card.CurrentStack, targetStack));
                 card.MoveToStack(targetStack);
                 return;
             }

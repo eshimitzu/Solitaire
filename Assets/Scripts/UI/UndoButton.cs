@@ -23,7 +23,7 @@ public class UndoButton : MonoBehaviour
 
     public void OnUndoClick()
     {
-        UndoManager.UndoLastMove();
+        UndoManager.UndoLast();
     }
 
     private void UpdateButtonState()
